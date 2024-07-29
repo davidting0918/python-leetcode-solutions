@@ -1,4 +1,5 @@
 # https://leetcode.com/problems/count-number-of-teams/description/
+import bisect
 class Solution:
     def numTeams_on3(self, rating: list[int]) -> int:
         count = 0
@@ -27,3 +28,33 @@ class Solution:
             count += left_less * right_more + left_more * right_less
         return count
     
+    def numTeams_on1(self, rating: list[int]) -> int:
+        count = 0
+
+        l = []
+        sorted_rating = sorted(rating)
+        low = {r: i for i, r in enumerate(sorted_rating)}
+        
+        n = len(rating)
+
+        for idx, r in enumerate(rating):
+            i = bisect.bisect(l, r)
+            l.insert(i, r)
+            j = low[r] - i
+            count += i * (n - 1 - idx - j) + j * (idx - i)  # asc + desc
+
+            print(f"Original index: {idx}, rating: {r}, bisect index: {i}, low index: {low[r]}, "
+                  f"{i} * ({n} - 1 - {idx} - {j}) + {j} * ({idx} - {i}) = {i * (n - 1 - idx - j) + j * (idx - i)}, "
+                  f"current_num: {i * (n - 1 - idx - j) + j * (idx - i)}, total: {count}")
+            
+        return count
+    
+if __name__ == "__main__":
+    s = Solution()
+    ratings = [2,5,3,4,1]
+    print(ratings)
+    s.numTeams_on1(ratings)
+
+    ratings = [1,2,3,4]
+    print(ratings)
+    s.numTeams_on1(ratings)
