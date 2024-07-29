@@ -10,12 +10,20 @@ class Solution:
         }
         
         num_per_group = 2 * numRows - 2
+        palindrome_index = self.create_palindrome_index(numRows)
 
-        for start in range(0, len(s), num_per_group):
-            sub_string = s[start:start + num_per_group]
-            print(f"Start: {start}, sub_string: {sub_string}")
-        return
-    
+        for index, char in enumerate(s):
+            group_index = index % num_per_group
+            results[palindrome_index[group_index] - 1].append(char)
+
+        return "".join(["".join(results[i]) for i in results])
+
+    def create_palindrome_index(self, length: int) -> list:
+        raw = [i for i in range(1, length + 1)]
+        raw += raw[-2:0:-1]
+        return raw
+
+
 if __name__ == "__main__":
     s = Solution()
     string = "PAYPALISHIRING"
