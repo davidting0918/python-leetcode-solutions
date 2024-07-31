@@ -1,6 +1,7 @@
 # https://leetcode.com/problems/filling-bookcase-shelves/description/
 class Solution:
     def minHeightShelves(self, books: list[list[int]], shelfWidth: int) -> int:
+        # i mean the total height of the bookshelf to store the book from 0 to i (inclusive)
         n = len(books)
         dp = [float("inf")] * (n + 1)
         dp[0] = 0
