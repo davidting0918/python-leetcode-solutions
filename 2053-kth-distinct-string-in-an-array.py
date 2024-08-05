@@ -11,3 +11,19 @@ class Solution:
                 remove.append(i)
 
         return distinct[k - 1] if k <= len(distinct) else ""
+    
+    def kthDistinct(self, arr: list[str], k: int) -> str:
+        ht = {}
+
+        for i in arr:
+            if i in ht:
+                ht[i] += 1
+            else:
+                ht[i] = 1
+        
+        for i in ht:
+            if ht[i] == 1:
+                k -= 1
+                if k == 0:
+                    return i
+        return ""
