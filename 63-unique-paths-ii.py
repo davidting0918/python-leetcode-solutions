@@ -1,33 +1,26 @@
 # https://leetcode.com/problems/unique-paths-ii/description/
 class Solution:
     def uniquePathsWithObstacles(self, obstacleGrid: list[list[int]]) -> int:
-        m = len(obstacleGrid)
-        n = len(obstacleGrid[0])
-        
-        o_m = 0
-        o_n = 0
-        for i in range(m):
-            for j in range(n):
+        grids = [
+            [0 for _ in range(len(obstacleGrid[0]))]
+            for _ in range(len(obstacleGrid))
+        ]
+
+        for i in range(len(obstacleGrid)):
+            for j in range(len(obstacleGrid[0])):
                 if obstacleGrid[i][j] == 1:
-                    o_m = i + 1
-                    o_n = j + 1
-                    break
-        
-        if o_m == 0 and o_n == 0:
-            return self._get_combination(m, n)
-        
-        print(f"m: {m}, n: {n}, o_m: {o_m}, o_n: {o_n}")
-        return self._get_combination(m, n) - (self._get_combination(o_m, o_n) * self._get_combination(m - o_m + 1, n - o_n + 1))
-    
-    def _get_combination(self, m: int, n: int) -> int:
-        total = m + n - 2
-        lower = min(m, n) - 1
-        result = 1
-        for i in range(lower):
-            result *= total - i
-            result /= i + 1
-        return int(result)
-        
+                    grids[i][j] = 0
+                elif i == 0 and j == 0:
+                    grids[i][j] = 1
+                elif i == 0:
+                    grids[i][j] = grids[i][j - 1]
+                elif j == 0:
+                    grids[i][j] = grids[i - 1][j]
+                else:
+                    grids[i][j] = grids[i - 1][j] + grids[i][j - 1]
+        return grids[-1][-1]
+
+
 if __name__ == "__main__":
     s = Solution()
     obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]
