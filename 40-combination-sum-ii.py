@@ -13,13 +13,13 @@ class Solution:
                 return
             else:
                 for i in range(start, n):
-                    if i > start and sorted_nums[i] == sorted_nums[i - 1]:
+                    if i > start and sorted_nums[i] == sorted_nums[i - 1]:  # ignore the same number since have dealt with it in the previous iteration
                         continue 
                     if sorted_nums[i] > target:
                         break
 
                     path.append(sorted_nums[i])
-                    print(f"Start finding path with: {path} at index {i}")
+                    # print(f"Start finding path with: {path} at index {i}")
                     backtrack(i+1, target - sorted_nums[i], path)
                     path.pop()
         
