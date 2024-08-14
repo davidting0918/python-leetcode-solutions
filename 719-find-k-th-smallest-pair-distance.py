@@ -7,9 +7,9 @@ class Solution:
 
         while low < high:
             mid = low + (high - low) // 2
-            count, left = 0, 0
+            count, left = 0, 0  # left and right are used to calculate the number of pairs with distance <= mid
             for right in range(len(nums)):
-                while nums[right] - nums[left] > mid:
+                while nums[right] - nums[left] > mid:  # until find the right most pair with distance <= mid, count is the number of pairs with distance <= mid
                     left += 1
                 count += right - left
             if count < k:
@@ -18,6 +18,7 @@ class Solution:
                 high = mid
 
         return low
+
 
 if __name__ == "__main__":
     s = Solution()
