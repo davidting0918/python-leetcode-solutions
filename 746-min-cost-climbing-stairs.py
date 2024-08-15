@@ -2,6 +2,11 @@
 from typing import List
 class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
+        """
+        Logic: need to climb at len(cost) + 1 steps, so create a dp array of len(cost) + 1.
+        level n can reach from level n-1 or n-2, so the cost to reach level n is the minimum cost between 
+        (cost to reach level n-1 + cost of level n-1) and (cost to reach level n-2 + cost of level n-2)
+        """
         dp = [0] * (len(cost) + 1)
 
         for i in range(2, len(cost) + 1):
