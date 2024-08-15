@@ -8,19 +8,17 @@ class Solution:
         2. points from previous step
         """
 
-        nums.sort()
-        values = [0] * (nums[-1] + 1)
-        dp = [0] * (nums[-1] + 1)
+        max_num = max(nums)
+        dp = [0] * (max_num + 1)
 
-        for num in set(nums):
-            values[num] = nums.count(num) * num
+        for num in nums:
+            dp[num] += num  # like the house robber problem, store the points in the dp array, and if you delete one value you will delete all
 
-        points = 0
-        for i in range(1, len(values)):
-            dp[i] = max(dp[i-1], dp[i-2] + values[i])
-            points = max(points, dp[i])
-        return points
-
+        for i in range(2, max_num + 1):
+            dp[i] = max(dp[i-1], dp[i-2] + dp[i])
+        
+        return dp[-1]
+                
 if __name__ == "__main__":
     s = Solution()
     print(s.deleteAndEarn([2,2,3,3,3,4]))
