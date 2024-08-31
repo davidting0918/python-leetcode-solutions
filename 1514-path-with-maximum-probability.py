@@ -1,31 +1,30 @@
 # https://leetcode.com/problems/path-with-maximum-probability/description/?envType=daily-question&envId=2024-08-27
 from typing import List
-import math
+import heapq
 class Solution:
     def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start_node: int, end_node: int) -> float:
         # Use Dijkstra's algorithm to find the maximum probability path and when dealing with prob, will use log to convert multiplication to addition
+        dist = [0] * n
+        dist[start_node] = 1
+
         graph = [[] for _ in range(n)]
-        for (a, b), prob in zip(edges, succProb):
-            log_prob = -math.log(prob)
-            graph[a].append((b, log_prob))
-            graph[b].append((a, log_prob))
+        for i, (s, e) in enumerate(edges):
+            graph[s].append((e, succProb[i]))
+            graph[e].append((s, succProb[i]))
 
-        pq = [(0, start_node)]
-
-        probs = [float('inf')] * n
-        probs[start_node] = 0
-
-        while pq:
-            max_index = min(range(len(pq)), key=lambda i: pq[i][0])
-            current_prob, current_node = pq.pop(max_index)
-            if current_node == end_node:
-                return math.exp(-current_prob)
-            for nei, nei_prob in graph[current_node]:
-                new_prob = current_prob + nei_prob
-                if new_prob < probs[nei]:
-                    probs[nei] = new_prob
-                    pq.append((new_prob, nei))
-        return 0
+        hq = [(1, start_node)]
+        while hq:
+            prob, node = max(hq, key=lambda x: x[0])
+            hq.remove((prob, node))
+            
+            if node == end_node:
+                return prob
+            
+            for nei, nei_prob in graph[node]:
+                if dist[nei] < dist[node] * nei_prob:
+                    dist[nei] = dist[node] * nei_prob
+                    hq.append((dist[nei], nei))
+        return dist[end_node]
     
     
 if __name__ == "__main__":
