@@ -2,30 +2,28 @@
 from typing import List
 class Solution:
     def robotSim(self, commands: List[int], obstacles: List[List[int]]) -> int:
-        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-        dir_idx = 0
-        x, y = 0, 0
-        
-        farest = 0
-        for i in commands:
-            if i == -2:
-                dir_idx -=1
-            elif i == -1:
-                dir_idx += 1
+        dx = [0, 1, 0, -1]
+        dy = [1, 0, -1, 0]
+        x = y = di = 0
+        obstacleSet = set(map(tuple, obstacles))
+        ans = 0
+
+        for cmd in commands:
+            if cmd == -2:
+                di = (di - 1) % 4
+            elif cmd == -1:
+                di = (di + 1) % 4
             else:
-                for j in range(i):
-                    x += directions[dir_idx][0]
-                    y += directions[dir_idx][1]
-                    if [x, y] in obstacles:
-                        x -= directions[dir_idx][0]
-                        y -= directions[dir_idx][1]
+                for _ in range(cmd):
+                    if (x + dx[di], y + dy[di]) not in obstacleSet:
+                        x += dx[di]
+                        y += dy[di]
+                        ans = max(ans, x * x + y * y)
+                    else:
                         break
-                    if x*x + y*y < farest:
-                        break
-                    farest = x*x + y*y
-        return farest
+
+        return ans
         
-    
 
 if __name__ == "__main__":
     s = Solution()
