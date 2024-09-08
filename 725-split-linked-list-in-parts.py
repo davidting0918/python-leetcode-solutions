@@ -10,16 +10,28 @@ class ListNode:
 
 class Solution:
     def splitListToParts(self, head: Optional[ListNode], k: int) -> List[Optional[ListNode]]:
-        result = [
-            ListNode() for _ in range(k)
-        ]
+        n, curr = 0, head
+        while curr:
+            n += 1
+            curr = curr.next
+        width, remainder = divmod(n, k)
 
-        index = 0
-        while head:
-            result[index].next = head
-            head = head.next
-            result[index] = result[index].next
-            index = (index + 1) % k
+        results = [None] * k
 
-        return [node.next for node in result]
+        curr, index = head, 0
 
+        while curr and index < k:
+            results[index] = curr
+
+            length = width + (1 if remainder > 0 else 0)
+
+            for _ in range(length - 1):
+                if curr:
+                    curr = curr.next
+
+            if curr:
+                curr.next, curr = None, curr.next
+
+            index += 1
+            remainder -= 1
+        return results
