@@ -4,25 +4,16 @@ from typing import List
 
 class Solution:
     def xorQueries(self, arr: List[int], queries: List[List[int]]) -> List[int]:
-        result = [0 for _ in range(len(queries))]
         
-        values = {
+        prefix_sum = [0] * (len(arr) + 1)
+        for i in range(len(arr)):
+            prefix_sum[i+1] = prefix_sum[i] ^ arr[i]
         
-        }
+        results = []
         
         for i in range(len(queries)):
-            if tuple(queries[i]) in values:
-                result[i] = values[tuple(queries[i])]
-                continue
-            if queries[i][0] == queries[i][1]:
-                result[i] = arr[queries[i][0]]
-                continue
-            for j in range(queries[i][0], queries[i][1] + 1):
-                result[i] ^= arr[j]
-            
-            values[tuple(queries[i])] = result[i]
-        return result
-        
+            results.append(prefix_sum[queries[i][0]] ^ prefix_sum[queries[i][1] + 1])
+        return results
         
     
         
