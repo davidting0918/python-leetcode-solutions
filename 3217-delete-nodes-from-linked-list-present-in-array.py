@@ -8,4 +8,14 @@ class ListNode:
         self.next = next
 class Solution:
     def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
-        return
+        num_set = set(nums)
+        dummy = ListNode(0)
+        pointer = dummy
+        while head:
+            if head.val not in num_set:
+                pointer.next = head
+                pointer = pointer.next
+            head = head.next
+        pointer.next = None
+        return dummy.next
+        
