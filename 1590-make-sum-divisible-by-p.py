@@ -19,8 +19,14 @@ class Solution:
             current_sum = (current_sum + num) % p
             
             find = (current_sum - target) % p
+
+            if find in prefix_sum:
+                min_length = min(min_length, i - prefix_sum[find])
+
+            prefix_sum[current_sum] = i
+
             continue
-    
+        return min_length if min_length < n else -1
 if __name__ == "__main__":
     s = Solution()
     nums = [3,1,4,2]
