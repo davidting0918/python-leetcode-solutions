@@ -23,6 +23,8 @@ class Solution:
             if find in prefix_sum:
                 min_length = min(min_length, i - prefix_sum[find])
 
+            # if there is a duplicate, the later index will overwrite the previous one.
+            # Therefore, the result will be the shortest
             prefix_sum[current_sum] = i
 
             continue
