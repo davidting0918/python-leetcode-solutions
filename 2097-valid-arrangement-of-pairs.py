@@ -14,7 +14,28 @@ class Solution:
             in_count[pair[1]] = in_count.get(pair[1], 0) + 1
             out_count[pair[0]] = out_count.get(pair[0], 0) + 1
 
-        return
+        # decide start point
+        start_node = None
+        for node in graphs:
+            if out_count.get(node, 0) > in_count.get(node, 0):  # Out-degree > In-degree
+                start_node = node
+                break
+
+        if start_node is None:
+            start_node = pairs[0][0]
+
+        # use hierholzer algorithm to find euler path
+        path = []
+        stack = [start_node]
+
+        while stack:
+            while graphs.get(stack[-1]):
+                next_node = graphs[stack[-1]].pop()
+                stack.append(next_node)
+            path.append(stack.pop())
+
+        path.reverse()
+        return [[path[i], path[i+1]] for i in range(len(path) - 1)]
 
 if __name__ == "__main__":
     s = Solution()
