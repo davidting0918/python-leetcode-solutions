@@ -9,13 +9,11 @@ class Solution:
         dp[0] = 0
         
         for i in range(1, n+1):
-            # get the max square root of i
-            target = math.floor(i ** (1/2)) 
-            dp[i] = dp[i - target ** 2] + 1
-
-            continue
-            
-
+            k = 1
+            while k * k <= i:
+                dp[i] = min(dp[i], dp[i - k*k] + 1)
+                k += 1
+        
         return dp[-1]
     
 
