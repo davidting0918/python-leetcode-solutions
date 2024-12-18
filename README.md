@@ -3,6 +3,7 @@ This is a place to store all the leetcode solutions from every day exercise
 
 ### Table of Content
 - [DP](#dp)
+- [Graph](#graph)
 
 
 
@@ -20,3 +21,10 @@ Solution logic:
   2. Then declare `queue` and `count`. `queue` is a list of int, `queue` stores the courses that can be taken now. `count` is an int, `count` stores the number of courses that can be taken now.
   3. Each time we take a course from `queue`, we decrease the `in_degree` of the courses that can be taken after this course. If the `in_degree` of the course is 0, we add this course to the `queue`.
   4. Finally, we check if the `count` is equal to the number of courses. If it is, return `True`, otherwise return `False`.
+
+
+- [994. Rotting Oranges](httpshttps://github.com/davidting0918/python-leetcode-solutions/blob/master/994-rotting-oranges.py)  
+Solution logic:
+  1. use BFS to traverse the grid, since need to get the minutes, we need to store the minutes in the grid.
+  2. declare `queue` and `fresh_oranges`. `queue` is a list of tuple, `queue` stores the position of the rotten oranges (as the starting point if rotting). `fresh_oranges` is an int, `fresh_oranges` stores the number of fresh oranges.
+  3. return `-1` if there is still fresh oranges after the BFS, otherwise return the maximum minutes in the grid.
