@@ -23,7 +23,7 @@ Solution logic:
   4. Finally, we check if the `count` is equal to the number of courses. If it is, return `True`, otherwise return `False`.
 
 
-- [994. Rotting Oranges](httpshttps://github.com/davidting0918/python-leetcode-solutions/blob/master/994-rotting-oranges.py)  
+- [994. Rotting Oranges](shttps://github.com/davidting0918/python-leetcode-solutions/blob/master/994-rotting-oranges.py)  
 Solution logic:
   1. use BFS to traverse the grid, since need to get the minutes, we need to store the minutes in the grid.
   2. declare `queue` and `fresh_oranges`. `queue` is a list of tuple, `queue` stores the position of the rotten oranges (as the starting point if rotting). `fresh_oranges` is an int, `fresh_oranges` stores the number of fresh oranges.
