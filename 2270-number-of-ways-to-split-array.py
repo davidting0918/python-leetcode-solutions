@@ -3,7 +3,16 @@ from typing import List
 
 class Solution:
     def waysToSplitArray(self, nums: List[int]) -> int:
-        return
+        n = len(nums)
+        total_sum = sum(nums)
+
+        count = 0
+        prefix_sum = [0] * (n)
+        for i in range(n-1):
+            prefix_sum[i] = prefix_sum[i - 1] + nums[i]
+            if prefix_sum[i] >= total_sum - prefix_sum[i]:
+                count += 1
+        return count
     
 if __name__ == "__main__":
     s = Solution()
