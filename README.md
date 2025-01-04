@@ -4,6 +4,7 @@ This is a place to store all the leetcode solutions from every day exercise
 ### Table of Content
 - [DP](#dp)
 - [Graph](#graph)
+- [Hash Table](#hash-table)
 
 
 
@@ -23,8 +24,18 @@ Solution logic:
   4. Finally, we check if the `count` is equal to the number of courses. If it is, return `True`, otherwise return `False`.
 
 
-- [994. Rotting Oranges](shttps://github.com/davidting0918/python-leetcode-solutions/blob/master/994-rotting-oranges.py)  
+- [994. Rotting Oranges](https://github.com/davidting0918/python-leetcode-solutions/blob/master/994-rotting-oranges.py)  
 Solution logic:
   1. use BFS to traverse the grid, since need to get the minutes, we need to store the minutes in the grid.
   2. declare `queue` and `fresh_oranges`. `queue` is a list of tuple, `queue` stores the position of the rotten oranges (as the starting point if rotting). `fresh_oranges` is an int, `fresh_oranges` stores the number of fresh oranges.
   3. return `-1` if there is still fresh oranges after the BFS, otherwise return the maximum minutes in the grid.
+
+
+### Hash Table
+#### Great Question
+- [1930. Unique Length-3 Palindromic Subsequences](https://github.com/davidting0918/python-leetcode-solutions/blob/master/1930-unique-length-3-palindromic-subsequences.py)
+Solution logic:
+  1. First declare `letters` which is a set of the given string.
+  2. Since the length of valid substring must be 3, the first and last letter must be the same.
+  3. Then we iterate through the `letters` to check whether the `letter` occur twice (remember their index `left`, `right`).
+  4. Then iterate through the `letters` second time to check if the letter appear between `left` and `right`. if it does, `ans` plus 1.
