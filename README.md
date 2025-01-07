@@ -13,7 +13,7 @@ This is a place to store all the leetcode solutions from every day exercise
 - [2779. Maximum Beauty of an Array After Applying Operation](https://github.com/davidting0918/python-leetcode-solutions/blob/master/solutions/2779-maximum-beauty-of-an-array-after-applying-operation.py)  
 Solution logic: Use sweep line to calculate the sum of the subarray, and then use the sum to calculate the beauty of the subarray.
 
-- [1769. Minimum Number of Operations to Move All Balls to Each Box](https://github.com/davidting0918/python-leetcode-solutions/blob/master/solutions/1769-minimum-number-of-operations-to-move-all-balls-to-each-box.py)
+- [1769. Minimum Number of Operations to Move All Balls to Each Box](https://github.com/davidting0918/python-leetcode-solutions/blob/master/solutions/1769-minimum-number-of-operations-to-move-all-balls-to-each-box.py)  
 Solution logic:  
   1. Declare `prefix_sum` and `suffix_sum`, which are two list to store the total step to move the balls lefter and righter to the current index.
   2. Take `prefix_sum` as an example, will declare `ball_count` to store the total balls number lefter than the current index. 
@@ -40,7 +40,7 @@ Solution logic:
 
 ### Hash Table
 #### Great Question
-- [1930. Unique Length-3 Palindromic Subsequences](https://github.com/davidting0918/python-leetcode-solutions/blob/master/solutions/1930-unique-length-3-palindromic-subsequences.py)
+- [1930. Unique Length-3 Palindromic Subsequences](https://github.com/davidting0918/python-leetcode-solutions/blob/master/solutions/1930-unique-length-3-palindromic-subsequences.py)  
 Solution logic:
   1. First declare `letters` which is a set of the given string.
   2. Since the length of valid substring must be 3, the first and last letter must be the same.
