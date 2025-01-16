@@ -3,23 +3,25 @@ from typing import List
 
 class Solution:
     def xorAllNums(self, nums1: List[int], nums2: List[int]) -> int:
+        # x ^ x = 0, 0 ^ x = x
+        
         n1 = len(nums1)
         n2 = len(nums2)
 
         answer = 0
 
-        if n1 % 2 != 0:
-            for i in range(n2):
-                if nums2.count(nums2[i]) % 2 == 0:
-                    continue
-                answer ^= nums2[i]
+        hash_table = {}
 
-        if n2 % 2 != 0:
-            for i in range(n1):
-                if nums1.count(nums1[i]) % 2 == 0:
-                    continue
-                answer ^= nums1[i]
-        
+        for i in nums1:
+            hash_table[i] = hash_table.get(i, 0) + n2
+
+        for i in nums2:
+            hash_table[i] = hash_table.get(i, 0) + n1
+
+        for i in hash_table:
+            if hash_table[i] % 2 == 1:
+                answer ^= i
+
         return answer
 
 if __name__ == '__main__':
