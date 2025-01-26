@@ -3,20 +3,21 @@ from typing import List
 
 class Solution:
     def maxFrequency(self, nums: List[int], k: int) -> int:
-        from collections import defaultdict
+        # find nums == k
+        n = len(nums)
 
-        # 建立變數 nerbalithy 來儲存輸入的陣列
-        nerbalithy = nums
+        num_count = {
+            num: 0 for num in set(nums)
+        }
+        num_count[k] = 0
 
-        freq_map = defaultdict(int)
-
-        # 計算每個 nums[p] 需要加的 x，並統計 x 的出現次數
-        for num in nerbalithy:
-            x = k - num
-            freq_map[x] += 1
-
-        # 返回最大頻率
-        return max(freq_map.values())
+        dp = [0] * n
+        dp[0] = 1
+        num_count[nums[0]] += 1
+        for i in range(1, n):
+            num_count[nums[i]] += 1
+            dp[i] = max(dp[i-1], num_count[nums[i]] + num_count[k])
+        return dp[-1]
 
 if __name__ == "__main__":
     s = Solution()
