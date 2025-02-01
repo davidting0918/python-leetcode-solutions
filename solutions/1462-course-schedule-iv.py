@@ -4,6 +4,14 @@ from typing import List
 
 class Solution:
     def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
+        graph = {}
+
+        for pre, course in prerequisites:
+            if course not in graph:
+                graph[course] = set()
+            graph[course].add(pre)
+
+
         return
 
 if __name__ == "__main__":
