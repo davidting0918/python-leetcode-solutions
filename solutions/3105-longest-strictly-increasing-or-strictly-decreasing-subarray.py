@@ -4,7 +4,31 @@ from typing import List
 
 class Solution:
     def longestMonotonicSubarray(self, nums: List[int]) -> int:
-        return
+        n = len(nums)
+
+        answer = 0
+
+        # ascending
+        length = 1
+        for i in range(1, n):
+            if nums[i] > nums[i-1]:
+                length += 1
+            else:
+                answer = max(answer, length)
+                length = 1
+        answer = max(answer, length)
+
+        # decreasing
+        length = 1
+        for i in range(1, n):
+            if nums[i] < nums[i-1]:
+                length += 1
+            else:
+                answer = max(answer, length)
+                length = 1
+        answer = max(answer, length)
+
+        return answer
 
 if __name__ == "__main__":
     s = Solution()
