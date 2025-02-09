@@ -1,9 +1,11 @@
 # https://leetcode.com/problems/count-number-of-bad-pairs/description/?envType=daily-question&envId=2025-02-09
 from typing import List
 
-
 class Solution:
     def countBadPairs(self, nums: List[int]) -> int:
+        """
+        Find all pairs (i, j) such that i < j  and i - nums[i] != j - nums[j]
+        """
         n = len(nums)
 
         hash_table = {}
@@ -12,9 +14,11 @@ class Solution:
             hash_table[num] = hash_table.get(num, 0) + 1
 
         answers = 0
-        for i in hash_table:
-            answers += (n - hash_table[i]) * (n - hash_table[i] - 1) // 2
-
+        total = 0
+        for i in sorted(hash_table.keys()):
+            answers += hash_table[i] * (n - hash_table[i] - total)
+            total += hash_table[i]
+            continue
         return answers
 
 if __name__ == "__main__":
