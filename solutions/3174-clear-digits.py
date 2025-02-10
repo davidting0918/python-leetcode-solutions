@@ -2,7 +2,18 @@
 
 class Solution:
     def clearDigits(self, s: str) -> str:
-        return
+        
+        numbers_string = "0123456789"
+
+        letters = []
+
+        for i in s:
+            if i in numbers_string:
+                if letters:
+                    letters.pop()
+            else:
+                letters.append(i)
+        return "".join(letters)
     
 if __name__ == "__main__":
     s = Solution()
