@@ -4,7 +4,20 @@ from typing import List
 
 class Solution:
     def maxAbsoluteSum(self, nums: List[int]) -> int:
-        return
+        n = len(nums)
+
+        max_sum = 0
+        current_sum = 0
+        for i in range(n):
+            current_sum = max(current_sum + nums[i], nums[i])
+            max_sum = max(max_sum, current_sum)
+
+        min_sum = float('inf')
+        current_sum = 0
+        for i in range(n):
+            current_sum = min(current_sum + nums[i], nums[i])
+            min_sum = min(min_sum, current_sum)
+        return max([abs(max_sum), abs(min_sum)])
 
 if __name__ == "__main__":
     s = Solution()
