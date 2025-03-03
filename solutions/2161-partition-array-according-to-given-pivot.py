@@ -3,10 +3,22 @@ from typing import List
 
 class Solution:
     def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
-        return
+        greater = []
+        less = []
+        equal = []
+
+        for i in nums:
+            if i > pivot:
+                greater.append(i)
+            elif i < pivot:
+                less.append(i)
+            else:
+                equal.append(i)
+
+        return less + equal + greater
     
 if __name__ == "__main__":
     s = Solution()
-    nums = [9, 12, 3, 5, 14, 10, 10]
+    nums = [9,12,5,10,14,3,10]
     pivot = 10
     print(s.pivotArray(nums, pivot))
