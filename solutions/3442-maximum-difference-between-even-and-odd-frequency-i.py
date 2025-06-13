@@ -9,12 +9,10 @@ class Solution:
 
         for letter in letters:
             letter_count = s.count(letter)
-            print(letter, letter_count)
             if letter_count % 2 == 0:
                 even_min = min(even_min, letter_count)
             else:
                 odd_max = max(odd_max, letter_count)
-        print(odd_max, even_min)
         return odd_max - even_min
 
 
