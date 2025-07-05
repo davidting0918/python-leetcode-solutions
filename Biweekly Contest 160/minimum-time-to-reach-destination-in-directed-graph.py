@@ -29,14 +29,7 @@ class Solution:
                     if start <= time <= end:
                         queue.append((nei, time + 1))
 
-            can_use_future_edge = False
-            if node in graph:
-                for nei, start, end in graph[node]:
-                    if end >= time:
-                        can_use_future_edge = True
-                        break
-
-            if can_use_future_edge and time + 1 <= max_wait_time:
+            if time + 1 <= max_wait_time:
                 queue.append((node, time + 1))
 
         return -1
