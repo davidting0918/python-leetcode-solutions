@@ -1,5 +1,6 @@
 # https://leetcode.com/contest/biweekly-contest-160/problems/minimum-time-to-reach-destination-in-directed-graph/description/
 from typing import List
+import heapq
 
 class Solution:
     def minTime(self, n: int, edges: List[List[int]]) -> int:
@@ -9,28 +10,34 @@ class Solution:
                 graph[u] = []
             graph[u].append((v, start, end))
 
-        max_wait_time = max(end for _, _, _, end in edges) if edges else 0
+        heap = [(0, 0)]
+        visited = {}
 
-        queue = [(0, 0)]
-        visited = set()
+        while heap:
+            time, node = heapq.heappop(heap)
 
-        while queue:
-            node, time = queue.pop(0)
-
+            # if reach to endpoint, return the result
             if node == n - 1:
                 return time
 
-            if (node, time) in visited:
+            # do not need to revisit the point
+            if node in visited and visited[node] <= time:
                 continue
-            visited.add((node, time))
+            visited[node] = time
 
             if node in graph:
                 for nei, start, end in graph[node]:
-                    if start <= time <= end:
-                        queue.append((nei, time + 1))
 
-            if time + 1 <= max_wait_time:
-                queue.append((node, time + 1))
+                    # can only pass throught the node that end time > current time
+                    if end < time:
+                        continue  
+                    
+                    
+                    if time < start:
+                        heapq.heappush(heap, (start + 1, nei))
+                    else:
+                        # wait till the node is open
+                        heapq.heappush(heap, (time + 1, nei))
 
         return -1
     
