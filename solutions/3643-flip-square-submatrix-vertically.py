@@ -5,11 +5,9 @@ class Solution:
         
 
         for col in range(y, y + k):
-            print(col)
 
             start_row = x
             for turn in range(k // 2):
-                print(start_row, start_row + k - turn - 1)
                 grid[start_row + turn][col], grid[start_row + k - turn - 1][col] = grid[start_row + k - turn - 1][col], grid[start_row + turn][col]           
         return grid
 
