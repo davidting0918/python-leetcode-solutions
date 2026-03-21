@@ -23,6 +23,14 @@ class Solution:
                 max(dp[i-1][1], dp[i-1][0] + prices[i] - fee)
             )
         return max(dp[-1])
+    
+    def maxProfit(self, prices: List[int], fee: int) -> int:
+        hold = -prices[0] - fee
+        no_hold = 0
+        for price in prices:
+            hold = max(hold, no_hold - price - fee)
+            no_hold = max(no_hold, hold + price)
+        return no_hold
 
 if __name__ == '__main__':
     s = Solution()
