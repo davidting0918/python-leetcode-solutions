@@ -1,4 +1,3 @@
-from re import L
 from typing import List
 
 class Solution:
@@ -19,9 +18,10 @@ class Solution:
                 else:
                     nums = [dp[i][j-1][0], dp[i][j-1][1], dp[i-1][j][0], dp[i-1][j][1]]
                 
+                products = [i * current_value for i in nums]
                 dp[i][j] = (
-                    max(i * current_value for i in nums),
-                    min(i * current_value for i in nums)
+                    max(products),
+                    min(products)
                 )
 
         MOD = 10**9 + 7
