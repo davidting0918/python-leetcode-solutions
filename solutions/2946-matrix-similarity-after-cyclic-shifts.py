@@ -2,8 +2,22 @@
 from typing import List
 class Solution:
     def areSimilar(self, mat: List[List[int]], k: int) -> bool:
+        n = len(mat[0])
+        shift = k % n
 
-        return
+        if shift == 0:
+            return True
+
+        for i, row in enumerate(mat):
+            if i % 2 == 0:
+                shifted = row[shift:] + row[:shift]
+            else:
+                shifted = row[-shift:] + row[:-shift]
+
+            if shifted != row:
+                return False
+
+        return True
 
 if __name__ == '__main__':
     s = Solution()
